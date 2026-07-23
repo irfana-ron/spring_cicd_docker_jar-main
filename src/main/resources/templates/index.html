@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>MediCare Hospital Dashboard</title>
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+
+body{
+background:#f1f5f9;
+}
+
+
+/* Header */
+
+header{
+
+height:80px;
+background:#0f766e;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 8%;
+
+}
+
+
+.logo{
+
+font-size:30px;
+font-weight:bold;
+
+}
+
+
+.logo span{
+
+color:#99f6e4;
+
+}
+
+
+nav a{
+
+color:white;
+text-decoration:none;
+margin-left:30px;
+font-size:18px;
+
+}
+
+
+
+/* Hero */
+
+
+.hero{
+
+padding:50px 8%;
+
+}
+
+
+.hero h1{
+
+font-size:45px;
+color:#134e4a;
+
+}
+
+
+.hero p{
+
+margin-top:15px;
+font-size:20px;
+color:#475569;
+
+}
+
+
+
+/* Cards */
+
+
+.dashboard{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+margin-top:40px;
+
+}
+
+
+
+.card{
+
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 8px 20px #ddd;
+
+}
+
+
+
+.card h2{
+
+color:#0f766e;
+font-size:35px;
+
+}
+
+
+.card p{
+
+margin-top:10px;
+
+}
+
+
+
+/* Sections */
+
+
+.section{
+
+padding:40px 8%;
+
+}
+
+
+.section h2{
+
+color:#134e4a;
+margin-bottom:25px;
+
+}
+
+
+
+.table-box{
+
+background:white;
+padding:25px;
+border-radius:15px;
+
+}
+
+
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+
+th{
+
+background:#0f766e;
+color:white;
+padding:15px;
+
+}
+
+
+td{
+
+padding:15px;
+border-bottom:1px solid #ddd;
+
+}
+
+
+
+/* Footer */
+
+
+footer{
+
+background:#134e4a;
+color:white;
+padding:20px;
+text-align:center;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+
+Medi<span>Care</span>
+
+</div>
+
+
+
+<nav>
+
+<a href="/">Dashboard</a>
+
+<a href="/patients">Patients</a>
+
+</nav>
+
+
+</header>
+
+
+
+
+<section class="hero">
+
+
+<h1>
+Hospital Management System
+</h1>
+
+
+<p>
+Manage patients, doctors, appointments and hospital operations efficiently.
+</p>
+
+
+
+<div class="dashboard">
+
+
+
+<div class="card">
+
+<h2>350</h2>
+
+<p>Total Patients</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>45</h2>
+
+<p>Doctors Available</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>120</h2>
+
+<p>Today's Appointments</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>70%</h2>
+
+<p>Bed Occupancy</p>
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<section class="section">
+
+
+<h2>
+Today's Appointments
+</h2>
+
+
+
+<div class="table-box">
+
+
+<table>
+
+
+<tr>
+
+<th>Patient</th>
+<th>Doctor</th>
+<th>Time</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+
+<td>Rahul Kumar</td>
+<td>Dr. Sharma</td>
+<td>10:30 AM</td>
+<td>Completed</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>Anita Singh</td>
+<td>Dr. Mehta</td>
+<td>12:00 PM</td>
+<td>Pending</td>
+
+</tr>
+
+
+<tr>
+
+<td>John Peter</td>
+<td>Dr. Kumar</td>
+<td>3:30 PM</td>
+<td>Scheduled</td>
+
+</tr>
+
+
+</table>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<footer>
+
+© 2026 MediCare Hospital Management System
+
+</footer>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Patients Management</title>
+
+
+<style>
+
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+
+}
+
+
+body{
+
+background:#f8fafc;
+
+}
+
+
+header{
+
+background:#0f766e;
+color:white;
+padding:25px 8%;
+display:flex;
+justify-content:space-between;
+
+}
+
+
+header a{
+
+color:white;
+text-decoration:none;
+
+}
+
+
+
+.container{
+
+padding:50px 8%;
+
+}
+
+
+
+h1{
+
+color:#134e4a;
+margin-bottom:30px;
+
+}
+
+
+
+.patient-box{
+
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px #ddd;
+
+}
+
+
+
+input,select{
+
+width:100%;
+padding:15px;
+margin:10px 0 20px;
+border:1px solid #ddd;
+border-radius:8px;
+
+}
+
+
+
+button{
+
+background:#0f766e;
+color:white;
+padding:15px 40px;
+border:none;
+border-radius:8px;
+font-size:16px;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+<h2>MediCare</h2>
+
+<a href="/">
+Back Dashboard
+</a>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+<h1>
+Patient Registration
+</h1>
+
+
+
+<div class="patient-box">
+
+
+<form>
+
+
+<label>
+Patient Name
+</label>
+
+<input type="text" placeholder="Enter patient name">
+
+
+
+<label>
+Age
+</label>
+
+<input type="number" placeholder="Enter age">
+
+
+
+<label>
+Gender
+</label>
+
+<select>
+
+<option>Male</option>
+
+<option>Female</option>
+
+</select>
+
+
+
+<label>
+Disease
+</label>
+
+<input type="text" placeholder="Disease details">
+
+
+
+<label>
+Doctor Assigned
+</label>
+
+<input type="text" placeholder="Doctor name">
+
+
+
+<button>
+Register Patient
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+
+</html>
