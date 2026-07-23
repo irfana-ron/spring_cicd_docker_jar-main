@@ -1,4 +1,4 @@
-package com.example.hospital.controller;
+package com.sak.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
