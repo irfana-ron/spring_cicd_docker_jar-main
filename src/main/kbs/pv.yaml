@@ -1,85 +1,17 @@
-apiVersion: apps/v1
-
-kind: StatefulSet
+apiVersion: v1
+kind: PersistentVolume
 
 metadata:
-
- name: mysql
-
- namespace: spring-app
-
+  name: mysql-pv
 
 spec:
+  capacity:
+    storage: 5Gi
 
- serviceName: mysql-service
-
- replicas: 1
-
-
- selector:
-
-  matchLabels:
-
-   app: mysql
-
-
- template:
-
-  metadata:
-
-   labels:
-
-    app: mysql
-
-
-  spec:
-
-
-   containers:
-
-   - name: mysql
-
-     image: mysql:8
-
-
-     ports:
-
-     - containerPort:3306
-
-
-     env:
-
-     - name: MYSQL_ROOT_PASSWORD
-
-       value: root
-
-
-     - name: MYSQL_DATABASE
-
-       value: springdb
-
-
-     volumeMounts:
-
-     - name: mysql-storage
-
-       mountPath: /var/lib/mysql
-
-
- volumeClaimTemplates:
-
- - metadata:
-
-    name: mysql-storage
-
-   spec:
-
-    accessModes:
-
+  accessModes:
     - ReadWriteOnce
 
-    resources:
+  persistentVolumeReclaimPolicy: Retain
 
-     requests:
-
-      storage: 5Gi
+  hostPath:
+    path: /data/mysql

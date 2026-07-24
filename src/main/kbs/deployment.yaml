@@ -1,61 +1,37 @@
 apiVersion: apps/v1
-
 kind: Deployment
 
 metadata:
-
- name: spring-deployment
-
- namespace: spring-app
-
+  name: spring-deployment
+  namespace: production
 
 spec:
+  replicas: 2
 
- replicas: 2
+  selector:
+    matchLabels:
+      app: spring-app
 
+  template:
+    metadata:
+      labels:
+        app: spring-app
 
- selector:
+    spec:
+      containers:
+        - name: spring-container
+          image: irfana03/springboot-app:v1
+          imagePullPolicy: Always
 
-  matchLabels:
+          ports:
+            - containerPort: 8080
 
-   app: spring-app
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-service:3306/springdb
 
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
 
- template:
-
-  metadata:
-
-   labels:
-
-    app: spring-app
-
-
-  spec:
-
-
-   containers:
-
-   - name: spring-container
-
-     image: your-dockerhub-username/spring-cicd-app
-
-     ports:
-
-     - containerPort: 8080
-
-
-     env:
-
-     - name: SPRING_DATASOURCE_URL
-
-       value: jdbc:mysql://mysql-service:3306/springdb
-
-
-     - name: SPRING_DATASOURCE_USERNAME
-
-       value: root
-
-
-     - name: SPRING_DATASOURCE_PASSWORD
-
-       value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: root
