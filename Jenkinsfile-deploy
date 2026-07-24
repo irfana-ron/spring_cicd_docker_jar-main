@@ -1,0 +1,80 @@
+pipeline {
+
+    agent any
+
+    parameters {
+
+        choice(
+            name: 'ACTION',
+            choices: ['Deploy Application','Deploy Database','Remove Application','Remove Database'],
+            description: 'Choose Action'
+        )
+
+    }
+
+    stages {
+
+        stage('Deploy App') {
+
+            when {
+                expression {
+                    params.ACTION == 'Deploy Application'
+                }
+            }
+
+            steps {
+                sh 'kubectl apply -f k8s/namespace.yaml'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
+            }
+
+        }
+
+        stage('Deploy DB') {
+
+            when {
+                expression {
+                    params.ACTION == 'Deploy Database'
+                }
+            }
+
+            steps {
+                sh 'kubectl apply -f k8s/pv.yaml'
+                sh 'kubectl apply -f k8s/pvc.yaml'
+                sh 'kubectl apply -f k8s/mysql-statefulset.yaml'
+            }
+
+        }
+
+        stage('Remove App') {
+
+            when {
+                expression {
+                    params.ACTION == 'Remove Application'
+                }
+            }
+
+            steps {
+                sh 'kubectl delete -f k8s/service.yaml'
+                sh 'kubectl delete -f k8s/deployment.yaml'
+            }
+
+        }
+
+        stage('Remove DB') {
+
+            when {
+                expression {
+                    params.ACTION == 'Remove Database'
+                }
+            }
+
+            steps {
+                sh 'kubectl delete -f k8s/mysql-statefulset.yaml'
+                sh 'kubectl delete -f k8s/pvc.yaml'
+                sh 'kubectl delete -f k8s/pv.yaml'
+            }
+
+        }
+    }
+}

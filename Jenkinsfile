@@ -1,63 +1,71 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(
-            name: 'ACTION',
-            choices: ['DEPLOY', 'REMOVE'],
-            description: 'Choose whether to deploy or remove containers'
-        )
-    }
-
     tools {
         maven 'maven'
+        jdk 'jdk21'
     }
 
     environment {
-        APP_NAME = "springboot-app"
+        IMAGE_NAME = "irfana03/springboot-app"
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
     stages {
-        stage('Build JAR') {
-            when {
-                expression { params.ACTION == 'DEPLOY' }
-            }
+
+        stage('Checkout') {
             steps {
-                echo "Building Spring Boot JAR..."
+                git branch: 'main',
+                url: 'https://github.com/irfana-ron/spring_cicd_docker_jar-main.git'
+            }
+        }
+
+        stage('Build Application') {
+            steps {
                 sh 'mvn clean package'
             }
         }
 
-        stage('Deploy Application') {
-            when {
-                expression { params.ACTION == 'DEPLOY' }
-            }
+        stage('Build Docker Image') {
             steps {
-                echo "Deploying Docker Containers..."
-                sh 'docker compose up --build -d'
+                sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
             }
         }
 
-        stage('Remove Application') {
-            when {
-                expression { params.ACTION == 'REMOVE' }
-            }
+        stage('Docker Login') {
             steps {
-                echo "Stopping and Removing Containers..."
-                sh 'docker compose down'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASS')]) {
+
+                    sh '''
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    '''
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
+                sh 'docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest'
+                sh 'docker push $IMAGE_NAME:latest'
+            }
+        }
+
+        stage('Clean Images') {
+            steps {
                 sh 'docker image prune -af'
             }
         }
     }
+
     post {
         success {
-            echo "Pipeline executed successfully..."
+            echo 'Docker image pushed successfully.'
         }
         failure {
-            echo "Pipeline execution failed..."
-        }
-        always {
-            echo "Pipeline completed..."
+            echo 'Pipeline Failed.'
         }
     }
 }
